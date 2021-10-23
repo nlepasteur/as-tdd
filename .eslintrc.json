@@ -1,0 +1,12 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+    ],
+    "rules": {
+        "no-unused-vars": "off",
+         "@typescript-eslint/explicit-module-boundary-types": "off"
+    }
+}
