@@ -1,8 +1,10 @@
 // types
 import type { Channel } from '@api';
+import type { OwnProps as PropsDefinedInChannelsSetters } from '../../withChannelsSetters';
+// libraries
 import { useState } from 'react';
 // components
-import ChannelItem from './ChannelItem';
+import ChannelItem from '../ChannelItem';
 
 type QueryResultChannels = {
   queryResultChannels: true;
@@ -24,13 +26,11 @@ type AllChannels = {
 };
 type FiltredChannels = QueryResultChannels | FollowedChannels | AllChannels;
 
-export type Props = {
+export type ChannelsListProps = {
   channels: Channel[];
   followedLength: number;
-  followChannel: (payload: { channel_id: string; position: number }) => void;
-  unfollowChannel: (payload: { channel_id: string }) => void;
-  reorderChannels: (payload: string[]) => void;
-} & FiltredChannels;
+} & PropsDefinedInChannelsSetters &
+  FiltredChannels;
 
 const ChannelsList = ({
   channels,
@@ -39,7 +39,7 @@ const ChannelsList = ({
   followedChannels,
   allChannels,
   ...props
-}: Props) => {
+}: ChannelsListProps) => {
   const [allChannelsIsOpen, setAllChannelsIsOpen] = useState(true);
   const channelsToDisplay = queryResultChannels
     ? channels.filter((channel) =>

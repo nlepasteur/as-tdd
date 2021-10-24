@@ -1,10 +1,11 @@
 // types
 import type { ChangeEventHandler } from 'react';
 import type { Channel } from '@api';
+import type { OwnProps as PropsDefinedInChannelsSetters } from '../../withChannelsSetters';
 // libraries
 import { useState } from 'react';
 // components
-import ChannelsList from './ChannelsList';
+import ChannelsList from '../ChannelsList';
 
 type Props = {
   isLogged: boolean;
@@ -12,12 +13,9 @@ type Props = {
   error: null | string;
   channels: Channel[];
   followedLength: number;
-  followChannel: (payload: { channel_id: string; position: number }) => void;
-  unfollowChannel: (payload: { channel_id: string }) => void;
-  reorderChannels: (payload: string[]) => void;
-};
+} & PropsDefinedInChannelsSetters;
 
-const ChannelsDropDownNav = ({
+const ChannelsDropDownContainer = ({
   fetchStatus,
   error,
   isLogged,
@@ -25,6 +23,9 @@ const ChannelsDropDownNav = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const reorderChannels = (channels: string[]) => {
+    console.log('yoyo');
+  };
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.target.value);
@@ -56,4 +57,4 @@ const ChannelsDropDownNav = ({
   );
 };
 
-export default ChannelsDropDownNav;
+export default ChannelsDropDownContainer;

@@ -1,16 +1,16 @@
 // types
 import { Channel } from '@api';
-import { Props as ChannelItemProps } from 'views/ChannelsDropDownNav/ChannelsList/ChannelItem';
-import { Props as ChannelsListProps } from 'views/ChannelsDropDownNav/ChannelsList';
+import { ChannelItemProps } from 'views/ChannelsNav/ChannelsDropDownNav/ChannelItem';
+import { ChannelsListProps } from 'views/ChannelsNav/ChannelsDropDownNav/ChannelsList';
 // libraries
 import { render, screen, fireEvent } from '@testing-library/react';
 // components
-import ChannelItem from 'views/ChannelsDropDownNav/ChannelsList/ChannelItem';
-import ChannelsList from 'views/ChannelsDropDownNav/ChannelsList';
-import ChannelsDropDownNav from 'views/ChannelsDropDownNav';
+import ChannelItem from 'views/ChannelsNav/ChannelsDropDownNav/ChannelItem';
+import ChannelsList from 'views/ChannelsNav/ChannelsDropDownNav/ChannelsList';
+import ChannelsDropDownNav from 'views/ChannelsNav/ChannelsDropDownNav/ChannelsDropDownContainer';
 
 describe('ChannelItem', () => {
-  let stubProps: ChannelItemProps;
+  let stubProps: Omit<ChannelItemProps, 'followChannel' | 'unfollowChannel'>;
   describe('channel is followed', () => {
     beforeEach(() => {
       stubProps = {
@@ -22,19 +22,62 @@ describe('ChannelItem', () => {
           uri: '',
         },
         followedLength: 1,
-        followChannel: jest.fn(),
-        unfollowChannel: jest.fn(),
       };
-      render(<ChannelItem {...stubProps} />);
+    });
+
+    it('"follow" button calls "unfollowChannel"', () => {
+      let called = false;
+      const mockedUnfollowChannel =
+        () => async (payload: { channel_id: string }) => {
+          called = true;
+        };
+      render(
+        <ChannelItem
+          {...stubProps}
+          followChannel={jest.fn()}
+          unfollowChannel={mockedUnfollowChannel}
+        />
+      );
       fireEvent.click(screen.getByRole('checkbox'));
+      expect(called).toBeTruthy();
     });
 
-    it('"follow/unfollow" button calls "unfollowChannel"', () => {
-      expect(stubProps.unfollowChannel).toBeCalled();
+    it('"follow" button doesn\'t call "followChannel"', () => {
+      let called = false;
+      const mockedUnfollowChannel =
+        () => async (payload: { channel_id: string }) => {};
+      const mockedFollowChannel =
+        () => async (payload: { channel_id: string; position: number }) => {
+          called = true;
+        };
+      render(
+        <ChannelItem
+          {...stubProps}
+          followChannel={mockedFollowChannel}
+          unfollowChannel={mockedUnfollowChannel}
+        />
+      );
+      fireEvent.click(screen.getByRole('checkbox'));
+      expect(called).toBeFalsy();
     });
 
-    it('"follow/unfollow" button doesn\'t call "followChannel"', () => {
-      expect(stubProps.followChannel).toBeCalledTimes(0);
+    it('"follow" button calls "unfollowChannel" with "channel_id" property', () => {
+      let args;
+      const mockedUnfollowChannel =
+        () => async (payload: { channel_id: string }) => {
+          args = payload;
+        };
+      render(
+        <ChannelItem
+          {...stubProps}
+          followChannel={jest.fn()}
+          unfollowChannel={mockedUnfollowChannel}
+        />
+      );
+      fireEvent.click(screen.getByRole('checkbox'));
+      expect(args).toEqual({
+        channel_id: stubProps.channel.id,
+      });
     });
   });
 
@@ -49,19 +92,63 @@ describe('ChannelItem', () => {
           uri: '',
         },
         followedLength: 1,
-        followChannel: jest.fn(),
-        unfollowChannel: jest.fn(),
       };
-      render(<ChannelItem {...stubProps} />);
+    });
+
+    it('"follow" button calls "followChannel"', () => {
+      let called = false;
+      const mockedfollowChannel =
+        () => async (payload: { channel_id: string; position: number }) => {
+          called = true;
+        };
+      render(
+        <ChannelItem
+          {...stubProps}
+          followChannel={mockedfollowChannel}
+          unfollowChannel={jest.fn()}
+        />
+      );
       fireEvent.click(screen.getByRole('checkbox'));
+      expect(called).toBeTruthy();
     });
 
-    it('"follow/unfollow" button calls "followChannel"', () => {
-      expect(stubProps.followChannel).toBeCalled();
+    it('"follow" button doesn\'t call "unfollowChannel"', () => {
+      let called = false;
+      const mockedFollowChannel =
+        () => async (payload: { channel_id: string; position: number }) => {};
+      const mockedUnfollowChannel =
+        () => async (payload: { channel_id: string }) => {
+          called = true;
+        };
+      render(
+        <ChannelItem
+          {...stubProps}
+          followChannel={mockedFollowChannel}
+          unfollowChannel={mockedUnfollowChannel}
+        />
+      );
+      fireEvent.click(screen.getByRole('checkbox'));
+      expect(called).toBeFalsy();
     });
 
-    it('"follow/unfollow" button doesn\'t call "unfollowChannel"', () => {
-      expect(stubProps.unfollowChannel).toBeCalledTimes(0);
+    it('"follow" button calls "followChannel" with "channel_id" and "position" properties', () => {
+      let args;
+      const mockedfollowChannel =
+        () => async (payload: { channel_id: string; position: number }) => {
+          args = payload;
+        };
+      render(
+        <ChannelItem
+          {...stubProps}
+          followChannel={mockedfollowChannel}
+          unfollowChannel={jest.fn()}
+        />
+      );
+      fireEvent.click(screen.getByRole('checkbox'));
+      expect(args).toEqual({
+        channel_id: stubProps.channel.id,
+        position: stubProps.followedLength,
+      });
     });
   });
 });
@@ -100,7 +187,6 @@ describe('ChannelsList', () => {
     followedLength: 1,
     followChannel: jest.fn(),
     unfollowChannel: jest.fn(),
-    reorderChannels: jest.fn(),
   };
   describe('given 3 channels including 1 followed', () => {
     it('displays 3 channels in "All channels" section', () => {
@@ -161,9 +247,9 @@ const stubProps = {
     },
   ] as Channel[],
   followedLength: 1,
+  setFollowedLength: jest.fn(),
   followChannel: jest.fn(),
   unfollowChannel: jest.fn(),
-  reorderChannels: jest.fn(),
 };
 
 describe('ChannelsDropDownNav', () => {

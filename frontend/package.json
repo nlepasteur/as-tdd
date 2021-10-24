@@ -11,6 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
@@ -19,6 +20,7 @@
     "@testing-library/react-hooks": "^7.0.2",
     "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.9",
+    "@types/redux-logger": "^3.0.9",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.4.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -36,6 +38,9 @@
     "html-webpack-plugin": "^5.4.0",
     "mini-css-extract-plugin": "^2.4.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5",
+    "redux": "^4.1.1",
+    "redux-logger": "^3.0.6"
   }
 }

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix \"*/src/**/*.{js,jsx,ts,tsx,json}\"",
-    "test:components": "jest --watch --config=frontend/jest.config.ts --testPathPattern=__tests__/components"
+    "test:components": "jest --watch --config=frontend/jest.config.ts --testPathPattern=__tests__/components",
+    "test:hooks": "jest --watch --config=frontend/jest.config.ts --testPathPattern=use"
   },
   "keywords": [],
   "author": "",
