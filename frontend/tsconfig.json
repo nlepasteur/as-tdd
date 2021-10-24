@@ -1,7 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "src",
     "jsx": "react-jsx",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@api": ["../../types"]
+      // autre mode de résolution n'était pas possible en raison d'où est localiser le dossier (un niveau plus haut que node_modules) et de comment sont résolus typescript imports
+    }
   }
 }
