@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix \"*/src/**/*.{js,jsx,ts,tsx,json}\"",
+    "test:services": "jest --watch --config=backend/jest.config.ts --testPathPattern=backend/__tests__/services",
     "test:components": "jest --watch --config=frontend/jest.config.ts --testPathPattern=__tests__/components",
     "test:hooks": "jest --watch --config=frontend/jest.config.ts --testPathPattern=use"
   },
