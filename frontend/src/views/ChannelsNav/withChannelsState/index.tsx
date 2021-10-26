@@ -55,14 +55,14 @@ const withChannelsState = (
     const [followedLength, setFollowedLength] = useState(
       data.filter((channel) => channel.favorite_position !== null).length
     );
-
+    console.log('status:', status);
     useEffect(() => {
       (async function () {
         try {
           dispatch({ type: 'FETCHING' });
-          const response = await fetch('');
+          const response = await fetch('http://localhost:8080/channels');
           const payload = await response.json();
-          dispatch({ type: 'SUCCESS', payload });
+          dispatch({ type: 'SUCCESS', payload: payload.data });
         } catch (e) {
           dispatch({ type: 'FAILURE', payload: e.message });
         }

@@ -1,8 +1,14 @@
 {
+  "extends": "../tsconfig.base.json",
+  "exclude": ["__tests__", "node_modules", "dist"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "baseUrl": "src",
     "paths": {
-      "@api": ["../types"]
+      "@api": ["../../types"],
+      "@routes/*": ["api/routes/*"],
+      "@services/*": ["services/*"]
     }
   }
 }

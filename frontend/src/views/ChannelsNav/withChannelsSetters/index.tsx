@@ -25,11 +25,20 @@ const withChannelsSetters = (
       'followChannel' | 'unfollowChannel'
     > = {
       followChannel:
-        (dispatch: Dispatch<PartialFetchStateActions>) =>
-        async ({ channel_id, position }) => {
+        (dispatch: Dispatch<PartialFetchStateActions>) => async (payload) => {
           try {
             dispatch({ type: 'FETCHING' });
-            const response = await fetch('');
+            const response = await fetch(
+              'http://localhost:8080/channels/favorites/add',
+              {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+              }
+            );
             response.ok && dispatch({ type: 'SUCCESS' });
             setFollowedLength(WithChannelsStateProps.followedLength + 1);
           } catch (e) {
@@ -38,11 +47,20 @@ const withChannelsSetters = (
         },
 
       unfollowChannel:
-        (dispatch: Dispatch<PartialFetchStateActions>) =>
-        async ({ channel_id }) => {
+        (dispatch: Dispatch<PartialFetchStateActions>) => async (payload) => {
           try {
             dispatch({ type: 'FETCHING' });
-            const response = await fetch('');
+            const response = await fetch(
+              'http://localhost:8080/channels/favorites/remove',
+              {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+              }
+            );
             response.ok && dispatch({ type: 'SUCCESS' });
             setFollowedLength(WithChannelsStateProps.followedLength - 1);
           } catch (e) {

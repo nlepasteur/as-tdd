@@ -1,0 +1,8 @@
+{
+  "preset": "ts-jest",
+  "verbose": true,
+  "modulePaths": ["src"],
+  "moduleNameMapper": {
+    "^services(.*)$": "<rootDir>/src/services$1"
+  }
+}

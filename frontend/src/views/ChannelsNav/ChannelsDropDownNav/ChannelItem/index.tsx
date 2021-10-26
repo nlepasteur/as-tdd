@@ -50,7 +50,7 @@ const ChannelItem = (props: ChannelItemProps) => {
         <input
           type="checkbox"
           onChange={handleFollow}
-          checked={!!props.channel.favorite_position}
+          checked={props.channel.favorite_position !== null}
         />
       </label>
     </div>

@@ -5,3 +5,11 @@ export type Channel = {
   name: string;
   uri: string;
 };
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  followed_channels: string[];
+};
