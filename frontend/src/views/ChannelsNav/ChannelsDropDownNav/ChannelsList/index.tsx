@@ -49,7 +49,8 @@ const ChannelsList = ({
     ? channels.filter((channel) => channel.favorite_position !== null)
     : channels;
   return (
-    <div>
+    <div className="channels">
+      {/* "channels" à la place de "menu__list-container" */}
       {queryResultChannels ? (
         <div>
           {`${
@@ -68,9 +69,12 @@ const ChannelsList = ({
       {((allChannels && allChannelsIsOpen) ||
         queryResultChannels ||
         followedChannels) && (
-        <ul>
+        <ul className="channels__list">
+          {/* à la place de "list-container__list" => "channels__list" */}
           {channelsToDisplay.map((channel) => (
             <li
+              // à la place de "list__item" => "channels__list__item"
+              className="channels__list__item"
               key={`${channel.id}${
                 queryResultChannels ? 'qrc' : followedChannels ? 'fc' : 'a'
               }`}

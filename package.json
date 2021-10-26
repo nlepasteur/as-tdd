@@ -8,7 +8,8 @@
     "lint": "eslint --fix \"*/src/**/*.{js,jsx,ts,tsx,json}\"",
     "test:services": "jest --watch --config=backend/jest.config.json --testPathPattern=backend/__tests__/services",
     "test:components": "jest --watch --config=frontend/jest.config.ts --testPathPattern=__tests__/components",
-    "test:hooks": "jest --watch --config=frontend/jest.config.ts --testPathPattern=use"
+    "test:hooks": "jest --watch --config=frontend/jest.config.ts --testPathPattern=use",
+    "test:utils": "jest --watch --config=frontend/jest.config.ts --testPathPattern=utils"
   },
   "keywords": [],
   "author": "",

@@ -32,15 +32,17 @@ const ChannelsDropDownContainer = ({
   };
 
   return (
-    <div>
+    <div className="channelsdd">
       <button
+        className="channelsdd__btn"
         onClick={() => setIsOpen(!isOpen)}
         disabled={fetchStatus !== 'success'}
       >
         Channels
       </button>
       {isOpen && (
-        <div>
+        <div className="channelsdd__menu">
+          <div>Explore</div>
           <input onChange={handleInputChange} value={inputValue} />
           {inputValue && (
             <ChannelsList
@@ -50,6 +52,8 @@ const ChannelsDropDownContainer = ({
             />
           )}
           {isLogged && <ChannelsList {...props} followedChannels />}
+          {/* doit-être ajouté avec createClasses => "channels__list--(queryResultChannels|followedChannels|allChannels) */}
+          {/* =======================================================> query-result-channels|followed-channels|all-channels */}
           <ChannelsList {...props} allChannels />
         </div>
       )}
