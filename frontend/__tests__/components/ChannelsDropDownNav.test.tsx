@@ -1,10 +1,5 @@
 // types
-import {
-  ReactNode,
-  ReactElement,
-  FunctionComponent,
-  ComponentType,
-} from 'react';
+import { ReactElement } from 'react';
 import { Channel } from '@api';
 import { ChannelItemProps } from 'views/ChannelsNav/ChannelsDropDownNav/ChannelItem';
 import { ChannelsListProps } from 'views/ChannelsNav/ChannelsDropDownNav/ChannelsList';
