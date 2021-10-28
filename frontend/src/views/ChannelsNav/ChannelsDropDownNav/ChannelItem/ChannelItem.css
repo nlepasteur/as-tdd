@@ -1,0 +1,132 @@
+.channel-grid {
+  display: grid;
+  letter-spacing: 0.015em;
+  color: rgb(var(--white-text));
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.channel-grid__item {
+  grid-area: 1/1/2/2;
+  border-radius: 3px;
+  min-height: 45px;
+}
+
+.channel-grid img {
+}
+
+.channel-overlay {
+  position: relative;
+  display: flex;
+  gap: 1em;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.66);
+  transition: background-color 0.2s linear;
+}
+
+.channel-overlay:hover {
+  background-color: rgba(var(--blue), 0.5);
+}
+
+.channel-overlay__move,
+.channel-overlay__name,
+.channel__overlay__follow {
+  display: flex;
+  align-items: center;
+}
+
+.channel-overlay__move {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s linear;
+  opacity: 0;
+}
+
+.channels-list--followed-channels
+  .channel-overlay:hover
+  .channel-overlay__move {
+  opacity: 1;
+  cursor: move;
+}
+
+.channel-overlay__name {
+  font-size: 0.9em;
+}
+
+.channel-overlay__follow {
+  display: grid;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.5em;
+  cursor: pointer;
+  padding: 0.2em;
+  width: 20px;
+  height: 20px;
+}
+
+.channel-overlay__follow:hover {
+  background-color: rgba(var(--grey-bg-51), 0.5);
+}
+
+.channel-overlay__follow::before {
+  padding: 0.2em;
+  position: absolute;
+  top: 50%;
+  right: calc(0.3em + 100%);
+  transform: translateY(-50%);
+  border-radius: 2px;
+  background-color: rgb(var(--grey-bg-51));
+  color: #bbb;
+  visibility: hidden;
+  font-size: 0.8em;
+  content: 'Follow';
+}
+
+.channel-grid--followed .channel-overlay__follow::before {
+  content: 'Unfollow';
+}
+
+.channel-overlay__follow:hover::before {
+  visibility: visible;
+}
+
+.follow-status {
+  grid-area: 1/2/1/2;
+  border-radius: 2px;
+  color: #bbb;
+  transition: background-color 0.2s linear;
+}
+
+.follow-status__followed,
+.follow-status__unfollow,
+.follow-status__follow,
+.follow-status__fetching {
+  opacity: 0;
+}
+
+.follow-status__followed svg {
+  color: #5cb85c;
+}
+
+.channel-grid--followed .follow-status__followed,
+.channel-grid--followed .channel-overlay__follow:hover .follow-status__unfollow,
+.follow-status__follow,
+.channel-overlay__follow:hover .follow-status__followed {
+  opacity: 1;
+}
+
+.channel-grid--followed .channel-overlay__follow:hover .follow-status__followed,
+.channel-overlay__follow:hover .follow-status__follow,
+.channel-grid--followed .follow-status__follow {
+  opacity: 0;
+}
+
+.channel-overlay__follow--fetching .follow-status__fetching {
+  opacity: 1;
+}
+
+.channel-overlay__follow--fetching .follow-status__follow,
+.channel-overlay__follow--fetching .follow-status__followed,
+.channel-overlay__follow--fetching .follow-status__unfollow {
+  opacity: 0;
+}

@@ -6,6 +6,8 @@ import type { OwnProps as PropsDefinedInChannelsSetters } from '../../withChanne
 import { useState } from 'react';
 // components
 import ChannelsList from '../ChannelsList';
+// style
+import './ChannelsDropDownContainer.css';
 
 type Props = {
   isLogged: boolean;
@@ -41,20 +43,20 @@ const ChannelsDropDownContainer = ({
         Channels
       </button>
       {isOpen && (
-        <div className="channelsdd__menu">
-          <div>Explore</div>
-          <input onChange={handleInputChange} value={inputValue} />
-          {inputValue && (
-            <ChannelsList
-              {...props}
-              queryResultChannels
-              searchBarInputValue={inputValue}
-            />
-          )}
-          {isLogged && <ChannelsList {...props} followedChannels />}
-          {/* doit-être ajouté avec createClasses => "channels__list--(queryResultChannels|followedChannels|allChannels) */}
-          {/* =======================================================> query-result-channels|followed-channels|all-channels */}
-          <ChannelsList {...props} allChannels />
+        <div className="channelsdd__menu-container">
+          <div className="channelsdd__menu">
+            <div>Explore</div>
+            <input onChange={handleInputChange} value={inputValue} />
+            {inputValue && (
+              <ChannelsList
+                {...props}
+                queryResultChannels
+                searchBarInputValue={inputValue}
+              />
+            )}
+            {isLogged && <ChannelsList {...props} followedChannels />}
+            <ChannelsList {...props} allChannels />
+          </div>
         </div>
       )}
     </div>

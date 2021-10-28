@@ -2,6 +2,8 @@
 import { Provider } from 'react-redux';
 // store utils
 import store from 'application/store';
+// style
+import './App.css';
 // tests!!!
 import ChannelsDropDownNav from 'views/ChannelsNav/ChannelsDropDownNav';
 

@@ -1,0 +1,7 @@
+.channels-list__item {
+  margin-bottom: 0.5em;
+}
+
+.channels-list__item:last-child {
+  margin: 0;
+}

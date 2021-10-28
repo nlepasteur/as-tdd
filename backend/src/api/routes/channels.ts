@@ -9,7 +9,7 @@ const { channelService, favoritesChannelsService } = services;
 
 const router = Router();
 
-router.post('/v1', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   const { body } = req;
   console.log('body: ', body);
   try {

@@ -1,9 +1,18 @@
 // types
-import type { ChangeEventHandler } from 'react';
+import type { MouseEventHandler } from 'react';
 import type { Channel } from '@api';
 import type { OwnProps as PropsDefinedInChannelsSetters } from '../../withChannelsSetters';
 // libraries
 import { useReducer } from 'react';
+import { Link } from 'react-router-dom';
+import classnames from 'classnames';
+// icons
+import { BiGridVertical } from 'react-icons/bi';
+import { FiCheck } from 'react-icons/fi';
+import { HiOutlinePlus } from 'react-icons/hi';
+import { IoCloseOutline } from 'react-icons/io5';
+// style
+import './ChannelItem.css';
 
 export type ChannelItemProps = {
   channel: Channel;
@@ -34,7 +43,9 @@ const reducer = (
 const ChannelItem = (props: ChannelItemProps) => {
   const [{ status, error }, dispatch] = useReducer(reducer, initialState);
 
-  const handleFollow: ChangeEventHandler<HTMLInputElement> = () => {
+  const handleFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     props.channel.favorite_position !== null
       ? props.unfollowChannel(dispatch)({ channel_id: props.channel.id })
       : props.followChannel(dispatch)({
@@ -44,16 +55,44 @@ const ChannelItem = (props: ChannelItemProps) => {
   };
 
   return (
-    <div>
-      <div>{props.channel.name}</div>
-      <label>
-        <input
-          type="checkbox"
-          onChange={handleFollow}
-          checked={props.channel.favorite_position !== null}
+    <Link to={`/channels/${props.channel.uri}`}>
+      <div
+        className={classnames(
+          'channel-grid',
+          props.channel.favorite_position !== null && 'channel-grid--followed'
+        )}
+      >
+        <img
+          src={props.channel.image_url}
+          alt={props.channel.name}
+          className="channel-grid__item"
         />
-      </label>
-    </div>
+        <div className="channel-grid__item channel-overlay">
+          <div className="channel-overlay__move">
+            <BiGridVertical />
+          </div>
+          <div className="channel-overlay__name">{props.channel.name}</div>
+          <button
+            className={classnames(
+              'channel-overlay__follow',
+              status === 'fetching' && 'channel-overlay__follow--fetching'
+            )}
+            onClick={handleFollow}
+          >
+            <div className="follow-status follow-status__followed">
+              <FiCheck />
+            </div>
+            <div className="follow-status follow-status__unfollow">
+              <IoCloseOutline />
+            </div>
+            <div className="follow-status follow-status__follow">
+              <HiOutlinePlus />
+            </div>
+            <div className="follow-status follow-status__fetching">F!</div>
+          </button>
+        </div>
+      </div>
+    </Link>
   );
 };
 

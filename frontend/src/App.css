@@ -1,0 +1,35 @@
+:root {
+  font-size: 14px;
+  --white-text: 255, 255, 255;
+  --blue: 19, 175, 240;
+  --grey-bg-51: 51, 51, 51;
+  --grey-bg-34: 34, 34, 34;
+  --padding-carousel-channel: 0.5rem 1.15rem;
+}
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #171717;
+  font-family: 'open sans', 'helvetica neue', Helvetica, Arial, sans-serif;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+}
+
+li {
+  list-style-type: none;
+}

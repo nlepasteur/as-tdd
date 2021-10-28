@@ -1,0 +1,24 @@
+.channelsdd__btn {
+  background-color: rgb(var(--grey-bg-51));
+  color: rgb(var(--white-text));
+  font-weight: 600;
+  padding: var(--padding-carousel-channel);
+  border-radius: 3px;
+}
+
+.channelsdd__menu-container {
+  position: absolute;
+  transform: translateY(0.5em);
+  width: 300px;
+  background-color: rgb(var(--grey-bg-34));
+  padding: 1.4rem 0.5rem 1.4rem;
+  box-shadow: 8px 0 34px 0 rgba(0, 0, 0, 0.87);
+  border-radius: 6px;
+  color: rgb(var(--white-text));
+}
+
+.channelsdd__menu {
+  overflow: auto;
+  max-height: 450px;
+  padding: 0.9rem;
+}
