@@ -1,5 +1,6 @@
 // libraries
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 // reducers
 import isLogged from './reducers/isLogged';
@@ -11,7 +12,11 @@ const rootReducer = combineReducers({ isLogged, dimension, explore, grid });
 
 const persistedState = loadState(['dimension', 'explore', 'grid']);
 
-const store = createStore(rootReducer, persistedState, applyMiddleware(logger));
+const store = createStore(
+  rootReducer,
+  persistedState,
+  applyMiddleware(logger, thunk)
+);
 
 function loadState(keys: string[]) {
   return keys

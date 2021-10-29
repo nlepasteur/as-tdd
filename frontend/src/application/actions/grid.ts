@@ -16,8 +16,8 @@ export const getUserPreferenceGrid =
       (async function () {
         // const response = await fetch("");
         // dispatch(adjustGrid(response));
-
         dispatch(adjustGrid('default'));
+        // prévoir le fait que devra être store dans local storage
       })();
     } catch (error) {
       dispatch(adjustGrid('default'));

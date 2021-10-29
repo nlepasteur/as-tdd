@@ -26,10 +26,10 @@ type WrappedComponentProps = PropsFromRedux;
 
 const withState = (Component: ComponentType<WrappedComponentProps>) => {
   function WithState(props: PropsFromRedux) {
-    // const dispatch: AppThunkDispatch = useAppDispatch();
-    // useEffect(() => {
-    //   dispatch(getUserPreferenceGrid());
-    // }, [dispatch]);
+    const dispatch: AppThunkDispatch = useAppDispatch();
+    useEffect(() => {
+      dispatch(getUserPreferenceGrid());
+    }, [dispatch]);
     return <Component {...props} />;
   }
 

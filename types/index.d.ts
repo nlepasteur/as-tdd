@@ -13,3 +13,9 @@ export type User = {
   password: string;
   followed_channels: string[];
 };
+
+export type Medium = {
+  id: string;
+  name: string;
+  uri: string;
+};
