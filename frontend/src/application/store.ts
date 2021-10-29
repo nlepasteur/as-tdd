@@ -7,10 +7,25 @@ import isLogged from './reducers/isLogged';
 import dimension from './reducers/dimension';
 import explore from './reducers/explore';
 import grid from './reducers/grid';
+import medias from './reducers/medias';
+import mediums from './reducers/mediums';
 
-const rootReducer = combineReducers({ isLogged, dimension, explore, grid });
+const rootReducer = combineReducers({
+  isLogged,
+  dimension,
+  explore,
+  grid,
+  medias,
+  ...mediums,
+});
 
-const persistedState = loadState(['dimension', 'explore', 'grid']);
+const persistedState = loadState([
+  'dimension',
+  'explore',
+  'grid',
+  'medias',
+  'mediums',
+]);
 
 const store = createStore(
   rootReducer,

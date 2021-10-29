@@ -7,7 +7,7 @@ import Media from '../Media';
 import Medium from '../Medium';
 
 type PropsFromWithSetters<T> = {
-  mediasMediums: T[];
+  data: T[];
   picked: string[];
   pick: (pickable: string) => void;
 };
@@ -24,7 +24,7 @@ function mediasMediumsList<T>(
   function MediasMediumsList(props: PropsFromWithSetters<T>) {
     return (
       <ul>
-        {props.mediasMediums.map((mediaMedium, i) => {
+        {props.data.map((mediaMedium, i) => {
           const isMedium = (pickable: unknown): pickable is MediumType => {
             return 'id' in mediaMedium;
           };
