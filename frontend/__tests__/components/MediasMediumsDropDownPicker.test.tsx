@@ -57,16 +57,3 @@ describe('MediaMedium', () => {
     });
   }
 });
-
-// describe('MediaMediumContainer', () => {
-//   describe('dropdown is close', () => {
-//     for (const section of [/mediums/i, /only show projects with/i]) {
-//       it(`"${section}" is not visible`, () => {
-//         const { queryByText } = render(<MediasMediumsDropDownPicker />);
-//         expect(queryByText(section)).not.toBeInTheDocument();
-//       });
-//     }
-//   });
-
-//   describe('dropdown is open', () => {});
-// });
