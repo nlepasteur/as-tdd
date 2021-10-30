@@ -9,6 +9,9 @@ import explore from './reducers/explore';
 import grid from './reducers/grid';
 import medias from './reducers/medias';
 import mediums from './reducers/mediums';
+import pagination from './reducers/pagination';
+import projects from './reducers/projects';
+import shuffledProjects from './reducers/shuffledProjects';
 
 const rootReducer = combineReducers({
   isLogged,
@@ -17,6 +20,9 @@ const rootReducer = combineReducers({
   grid,
   medias,
   ...mediums,
+  pagination,
+  projects,
+  shuffledProjects,
 });
 
 const persistedState = loadState([
