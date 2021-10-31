@@ -1,0 +1,28 @@
+@media (max-width: 752px) {
+  .explore-list {
+    margin-left: 1em;
+  }
+}
+
+@media (min-width: 753px) and (max-width: 976px) {
+  .explore-list {
+    margin-left: 1.5em;
+  }
+}
+
+@media (min-width: 1185px) {
+  .explore-list {
+    margin-left: 1.5em;
+  }
+}
+
+.explore-list {
+  grid-area: explorepicker;
+  /* color: #747474; */
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  position: relative;
+  color: #bbb;
+}

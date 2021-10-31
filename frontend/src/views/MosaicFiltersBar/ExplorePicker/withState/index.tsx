@@ -1,7 +1,7 @@
 // types
 import type { ComponentType } from 'react';
 import type { RootState } from 'application/store';
-// libraries
+// libs
 import { connect } from 'react-redux';
 
 const mapState = ({ isLogged, dimension }: RootState) => ({

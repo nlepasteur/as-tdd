@@ -1,0 +1,9 @@
+.adjust-grid-list {
+  grid-area: adjustgrid;
+  display: flex;
+  justify-self: end;
+}
+
+.adjust-grid-list--hidden {
+  visibility: hidden;
+}

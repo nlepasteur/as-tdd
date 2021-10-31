@@ -4,7 +4,7 @@ import type { AnyAction } from 'redux';
 import type { ThunkAction } from 'redux-thunk';
 import type { RootState } from 'application/store';
 import type { AppThunkDispatch } from 'application/hooks';
-// libraries
+// libs
 import { useEffect } from 'react';
 // store utils
 import { useAppDispatch, useAppSelector } from 'application/hooks';

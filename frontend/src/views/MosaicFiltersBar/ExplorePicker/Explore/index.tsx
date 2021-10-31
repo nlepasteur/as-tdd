@@ -1,8 +1,11 @@
 // types
 import type { ReactElement } from 'react';
 import type { Dimension } from 'application/reducers/dimension';
-// libraries
-import { NavLink } from 'react-router-dom';
+// libs
+import { Link, useLocation } from 'react-router-dom';
+import classnames from 'classnames';
+// style
+import './Explore.css';
 
 type Explore = 'community' | 'trending' | 'latest' | 'following';
 
@@ -13,6 +16,9 @@ type ExploreProps = {
 };
 
 const Explore = (props: ExploreProps) => {
+  const location = useLocation();
+  const currentExplore = /sort_by=([^&]+)/.exec(location.search);
+
   const generatePathname = (explore: string) => {
     // aurait pu tout aussi bien se faire en utilisant location
     return props.dimension !== 'all'
@@ -21,10 +27,19 @@ const Explore = (props: ExploreProps) => {
   };
   // si navling ne fait pas l'affaire utiliser location et comparer search à props.explore
   return (
-    <NavLink activeClassName="active" to={generatePathname(props.explore)}>
-      {props.explore}
+    <li
+      className={classnames(
+        'explore-list__item',
+        currentExplore &&
+          currentExplore[1] === props.explore &&
+          'explore-list__item--active'
+      )}
+    >
+      <Link to={generatePathname(props.explore)}>
+        <span>{props.explore}</span>
+      </Link>
       {props.children && props.children}
-    </NavLink>
+    </li>
   );
 };
 

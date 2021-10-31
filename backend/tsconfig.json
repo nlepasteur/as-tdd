@@ -3,12 +3,12 @@
   "exclude": ["__tests__", "node_modules", "dist"],
   "compilerOptions": {
     "outDir": "dist",
-    "moduleResolution": "node",
-    "baseUrl": "src",
-    "paths": {
-      "@api": ["../../types"],
-      "@routes/*": ["api/routes/*"],
-      "@services/*": ["services/*"]
-    }
+    "moduleResolution": "node"
+    // "baseUrl": "src",
+    // "paths": {
+    //   "@api": ["../../types"],
+    //   "@routes/*": ["api/routes/*"],
+    //   "@services/*": ["services/*"]
+    // }
   }
 }

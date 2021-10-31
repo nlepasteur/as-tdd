@@ -20,6 +20,16 @@ body {
   font-family: 'open sans', 'helvetica neue', Helvetica, Arial, sans-serif;
 }
 
+a:link,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
 button {
   border: none;
   background: none;

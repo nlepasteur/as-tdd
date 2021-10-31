@@ -10,8 +10,9 @@ import { connect } from 'react-redux';
 import { useAppDispatch, AppThunkDispatch } from 'application/hooks';
 import { adjustGrid, getUserPreferenceGrid } from 'application/actions/grid';
 
-const mapState = ({ grid }: RootState) => ({
+const mapState = ({ grid, explore }: RootState) => ({
   grid,
+  explore,
 });
 
 const mapDispatch = (dispatch: AppDispatch) => ({

@@ -1,0 +1,48 @@
+.adjust-grid-list__item {
+  display: inline-block;
+}
+
+.adjust-grid-list__item button {
+  border: 1px solid #333;
+  background: none;
+  color: #747474;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 30px;
+  height: 30px;
+  transition: background-color 198.817ms linear 1.18343ms, color 0s linear,
+    border-color 0s linear;
+}
+
+.adjust-grid-list__item:first-child button {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.adjust-grid-list__item:last-child button {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.adjust-grid-list__item:hover button {
+  color: #fff;
+  background-color: #333;
+}
+
+.adjust-grid-list__item--active button,
+.adjust-grid-list__item--active:hover button {
+  cursor: not-allowed;
+  background: 0;
+  color: #747474;
+}
+
+@media (max-width: 752px) {
+  .adjust-grid-list {
+    justify-content: flex-end;
+    margin-right: 1em;
+  }
+}
+
+@media (min-width: 753px) {
+  .adjust-grid {
+    justify-content: flex-end;
+  }
+}

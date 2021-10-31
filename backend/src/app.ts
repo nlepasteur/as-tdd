@@ -1,3 +1,5 @@
+// types
+import type { User as UserType } from '../../types';
 // libraries
 import express from 'express';
 import session from 'express-session';
@@ -8,6 +10,7 @@ import server from '../server';
 // routes
 // import channelsRoute from '@routes/channels';
 import channelsRoute from './api/routes/channels';
+import userRoute from './api/routes/user';
 
 const app = express();
 
@@ -35,14 +38,26 @@ app.use(
 // later authentication
 import User from './models/User';
 app.use(async function (req, res, next) {
-  const user = await User.findOne({ name: 'james bond' });
-  req.session.user = user;
-  console.log('REQ: ', req.session);
+  if (!req.session.user) {
+    const user = await User.findOne({
+      name: 'james bond',
+    });
+    const forSession = {
+      name: user!.name as string,
+      _id: user!._id as string,
+      email: user!.email as string,
+      followed_channels: user!.followed_channels as string[],
+    };
+
+    req.session.user = forSession;
+    console.log('REQ.SESSION.USER: ', user);
+  }
   next();
 });
 
 // routes
 app.use('/channels', channelsRoute);
+app.use('/user', userRoute);
 
 app.get('/', (req, res, next) => {
   res.json({ message: 'welcome' });

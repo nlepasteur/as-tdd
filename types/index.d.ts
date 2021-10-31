@@ -45,3 +45,17 @@ export type Project = {
   hide_as_adult: boolean;
   id: string;
 };
+
+export type GridSize = 'small' | 'default' | 'large';
+
+export type GridSizePreference = {
+  id: string;
+  user_id: string;
+  grid_size: GridSize;
+};
+
+export type GridSizePreferencePostBody = {
+  grid_size: GridSize;
+};
+
+export type GridSizePreferencePatchBody = { grid_size: GridSize };
