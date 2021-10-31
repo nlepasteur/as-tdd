@@ -2,8 +2,10 @@
   font-size: 14px;
   --white-text: 255, 255, 255;
   --blue: 19, 175, 240;
+  --grey-bg-187: 187, 187, 187;
   --grey-bg-51: 51, 51, 51;
   --grey-bg-34: 34, 34, 34;
+  --grey-border: 93, 93, 93;
   --padding-carousel-channel: 0.5rem 1.15rem;
 }
 

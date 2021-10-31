@@ -15,6 +15,7 @@ const Media = (props: MediumProps) => (
       onChange={() => props.pick(props.pickable.id)}
     />
     {props.pickable.name}
+    <span className="custom" />
   </label>
 );
 

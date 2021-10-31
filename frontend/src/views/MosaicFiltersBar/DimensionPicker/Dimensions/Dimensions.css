@@ -1,5 +1,5 @@
 .dimension-list {
-  display: flex;
+  display: none;
   justify-content: center;
   gap: 1em;
   flex-grow: 1;
@@ -27,7 +27,27 @@
   transition: color 0.2s linear;
 }
 
+.mm-dd__separation--dimension-picker {
+  display: none;
+}
+
 .dimension-list .active span {
   text-shadow: rgba(0, 0, 0, 0.35) 0px 1px 1px;
   color: #fff;
+}
+
+@media (min-width: 753px) {
+  .dimension-list--outside {
+    display: flex;
+  }
+}
+
+@media (max-width: 752px) {
+  .dimension-list--inside {
+    display: flex;
+  }
+
+  .mm-dd__separation--dimension-picker {
+    display: block;
+  }
 }

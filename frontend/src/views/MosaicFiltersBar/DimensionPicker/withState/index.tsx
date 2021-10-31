@@ -12,10 +12,10 @@ export const connector = connect(mapState);
 
 type PropsFromRedux = ReturnType<typeof mapState>;
 
-type WithStateProps = PropsFromRedux;
+type WithStateProps = PropsFromRedux & { btnLocation: 'inside' | 'outside' };
 
 const withState = (Component: ComponentType<WithStateProps>) => {
-  function WithState(props: PropsFromRedux) {
+  function WithState(props: WithStateProps) {
     return <Component {...props} />;
   }
 

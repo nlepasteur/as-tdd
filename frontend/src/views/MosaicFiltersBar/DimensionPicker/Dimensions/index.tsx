@@ -10,13 +10,16 @@ import './Dimensions.css';
 
 type DimensionsProps = {
   explore: Explore;
+  btnLocation: 'inside' | 'outside';
 };
 
-const Dimensions = (props: DimensionsProps) => {
+const Dimensions = ({ btnLocation, ...props }: DimensionsProps) => {
   const location = useLocation();
   const currentExplore = /dimension=(.+)$/.exec(location.search);
   return (
-    <ul className="dimension-list">
+    <ul
+      className={classnames('dimension-list', `dimension-list--${btnLocation}`)}
+    >
       <li
         className={classnames(
           'dimension-list__item',

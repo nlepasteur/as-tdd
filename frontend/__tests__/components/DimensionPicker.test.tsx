@@ -27,7 +27,10 @@ describe('Dimension', () => {
 
 describe('Dimensions', () => {
   it('displays "all", "2d" and "3d" as possible explore filter', () => {
-    const stubProps = { explore: 'community' as const };
+    const stubProps = {
+      explore: 'community' as const,
+      btnLocation: 'inside' as const,
+    };
     const { getByText } = render(<Dimensions {...stubProps} />, {
       wrapper: BrowserRouter as any,
     });

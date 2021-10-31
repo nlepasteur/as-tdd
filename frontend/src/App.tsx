@@ -16,7 +16,7 @@ const App = () => {
     <Provider store={store}>
       <div>App</div>
       <ChannelsDropDownNav />
-      <DimensionPicker />
+      <DimensionPicker btnLocation="outside" />
       <ExplorePicker />
       <GridAdjustment />
       <DropDownMediasMediumsPicker />

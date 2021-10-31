@@ -1,29 +1,19 @@
 // types
-import type { Dispatch, SetStateAction } from 'react';
 import type { Media as MediaType } from 'application/reducers/medias';
 import type { Medium as MediumType } from 'application/reducers/mediums';
 // libs
 import { useState } from 'react';
 // store utils
-import { useAppDispatch, useAppSelector } from 'application/hooks';
+import { useAppSelector } from 'application/hooks';
 // medias
 import { getPickedMedias } from 'application/selectors/medias';
-import {
-  updatePickedMedias,
-  clearPickedMedias,
-} from 'application/actions/medias';
+import { updatePickedMedias } from 'application/actions/medias';
 // mediums
-import {
-  updatePickedMediums,
-  getMediums,
-  clearPickedMediums,
-} from 'application/actions/mediums';
+import { updatePickedMediums, getMediums } from 'application/actions/mediums';
 import {
   getPickedMediums,
   getMediumsState,
 } from 'application/selectors/mediums';
-// utils
-import updateLocalStorage from 'utils/updateLocalStorage';
 import { stringIntoArray } from 'utils/stringUtils';
 // components
 import withState from './withState';
@@ -31,6 +21,11 @@ import withSetters from './withSetters';
 import MediasMediumsList from './MediasMediumsList';
 import Media from './Media';
 import Medium from './Medium';
+import MediasMediumsToggleButton from './MediasMediumsToggleButton';
+import MediasMediumsClearButton from './MediasMediumsClearButton';
+import DimensionPicker from '../DimensionPicker';
+// style
+import './MediasMediumsDropDownPicker.css';
 
 const mediasDi = {
   target: 'medias' as const,
@@ -54,37 +49,6 @@ const MediumsList = withState(mediumsDi)(
   withSetters<MediumType, 'mediums'>(mediumsDi)(MediasMediumsList(Medium))
 );
 
-const MediasMediumsDropDownPickerButton = ({
-  isOpen,
-  setIsOpen,
-  pickedMedias = '',
-  pickedMediums = '',
-  pickedCount = 0,
-}: {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  pickedMedias: string;
-  pickedMediums: string;
-  pickedCount: number;
-}) => {
-  return (
-    <button onClick={() => setIsOpen(!isOpen)}>
-      {pickedCount ? <span>{pickedCount}</span> : null}All Media
-    </button>
-  );
-};
-
-const MediasMediumsDropDownPickerClear = () => {
-  const dispatch = useAppDispatch();
-  const clear = () => {
-    dispatch(clearPickedMedias());
-    dispatch(clearPickedMediums());
-    updateLocalStorage('medias', '');
-    updateLocalStorage('mediums', '');
-  };
-  return <button onClick={clear}>Clear</button>;
-};
-
 const MediasMediumsDropDownPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pickedMedias = useAppSelector(getPickedMedias);
@@ -92,24 +56,31 @@ const MediasMediumsDropDownPicker = () => {
   const pickedCount =
     stringIntoArray(pickedMedias).length +
     stringIntoArray(pickedMediums).length;
-
   return (
-    <div>
+    <div className="mm-dd">
       <div>
-        {pickedCount && <MediasMediumsDropDownPickerClear />}
-        <MediasMediumsDropDownPickerButton
+        {pickedCount && <MediasMediumsClearButton btnLocation="outside" />}
+        <MediasMediumsToggleButton
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          pickedMedias={pickedMedias}
-          pickedMediums={pickedMediums}
           pickedCount={pickedCount}
         />
       </div>
       {isOpen && (
-        <div>
-          <MediasMediumsDropDownPickerClear />
-          <MediasList data={[{ name: 'media 1' }, { name: 'media 2' }]} />
+        <div className="mm-dd__menu">
+          {pickedCount > 0 && (
+            <>
+              <MediasMediumsClearButton btnLocation="inside" />
+              <div className="mm-dd__separation mm-dd__separation--clear-btn" />
+            </>
+          )}
+          <DimensionPicker btnLocation="inside" />
+          <div className="mm-dd__separation mm-dd__separation--dimension-picker" />
+          <span className="mm-dd__list-title">MEDIUMS</span>
           <MediumsList />
+          <div className="mm-dd__separation " />
+          <span className="mm-dd__list-title">ONLY SHOW PROJECTS WITH:</span>
+          <MediasList data={[{ name: 'media 1' }, { name: 'media 2' }]} />
         </div>
       )}
     </div>

@@ -1,9 +1,8 @@
 // types
 import type { Dimension } from 'application/reducers/dimension';
-// libs
-import { useLocation } from 'react-router-dom';
 // components
 import Explore from '../Explore';
+import RefreshButton from '../RefreshButton';
 // style
 import './Explores.css';
 
@@ -17,7 +16,7 @@ const Explores = (props: ExploresProps) => {
     <ul className="explore-list">
       {!/channels/.test(location.pathname) && (
         <Explore {...props} explore="community">
-          <div className="list-item__refresh">yoyo</div>
+          <RefreshButton />
         </Explore>
       )}
       <Explore {...props} explore="trending" />
