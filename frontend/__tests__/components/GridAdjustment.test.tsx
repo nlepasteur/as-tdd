@@ -3,7 +3,7 @@ import { Grid as GridType } from 'application/reducers/grid';
 // libs
 import { render, fireEvent } from '@testing-library/react';
 // components
-import Grid from 'views/MosaicFiltersBar/GridAdjustment/Grid';
+import Grid from 'views/Mosaic/MosaicFiltersBar/GridAdjustment/Grid';
 
 describe('Grid', () => {
   for (const adjustment of ['default', 'increase', 'decrease']) {

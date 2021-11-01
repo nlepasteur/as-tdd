@@ -7,6 +7,6 @@ export type DimensionActions = {
 // export type DimensionActions = `SET_${Uppercase<string & Dimension>}`;
 
 export const setDimension = (payload: Dimension) => ({
-  type: 'SET_DIMENSION',
+  type: 'SET_DIMENSION' as const,
   payload,
 });

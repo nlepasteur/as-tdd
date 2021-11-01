@@ -1,15 +1,27 @@
-// types
-import type { User as FormattedUser } from '@api';
 // model
-import User from '../models/User';
+import User from '../models/user-model';
 
-type RequiredData = Pick<FormattedUser, 'name' | 'email' | 'password'>;
+const createUser =
+  (model: typeof User) =>
+  (required: { username: string; email: string; password: string }) => {
+    console.log('required: ', required);
+    const user = new model(required);
+    return user.save();
+  };
 
-const createUser = (model: typeof User) => (payload: RequiredData) => {
-  const user = new model(payload);
-  return user.save();
+const findOne = (model: typeof User) => (required: { user_id: string }) => {
+  const user = model.findOne(required);
+  return user;
 };
+
+const findUserByUsername =
+  (model: typeof User) => (required: { username: string }) => {
+    const user = model.findOne(required);
+    return user;
+  };
 
 export default (model: typeof User) => ({
   createUser: createUser(model),
+  findOne: findOne(model),
+  findUserByUsername: findUserByUsername(model),
 });

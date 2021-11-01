@@ -1,0 +1,50 @@
+.mosaic-filters-bar {
+  display: grid;
+  row-gap: 1em;
+  align-items: center;
+}
+
+@media (max-width: 752px) {
+  .mosaic-filters-bar {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+    grid-template-areas:
+      'channelsnav channelsnav channelsnav channelsnav'
+      'channelsdd channelsdd mmdd mmdd'
+      'explorepicker  explorepicker explorepicker adjustgrid';
+  }
+}
+
+/* puisque colonnes définies avec vw, gap n'était pas */
+/* grid-template-columns: repeat(4, minmax(50px, 1fr)); */
+@media (min-width: 753px) and (max-width: 976px) {
+  .mosaic-filters-bar {
+    column-gap: 1em;
+    grid-template-columns: 1fr 1fr 1fr auto auto;
+    grid-template-areas:
+      'channelsdd channelsnav channelsnav channelsnav channelsnav'
+      'explorepicker explorepicker . adjustgrid mmdd';
+  }
+
+  .dimension-picker--filtersbar {
+    display: none;
+  }
+}
+
+@media (min-width: 977px) {
+  .mosaic-filters-bar {
+    gap: 1em;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto auto;
+    grid-template-areas:
+      'channelsdd channelsnav channelsnav channelsnav channelsnav channelsnav'
+      'explorepicker explorepicker dimensionpicker dimensionpicker adjustgrid mmdd';
+  }
+}
+/* 
+  @media (min-width: 1185px) {
+    .filters-bar {
+      grid-template-areas:
+        "channelsdd channelsnav channelsnav channelsnav"
+        "explorepicker dimensionpicker adjustgrid mmedd";
+    }
+  } */

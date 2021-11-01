@@ -1,15 +1,15 @@
 // types
 import { ReactElement } from 'react';
 import { Channel } from '@api';
-import { ChannelItemProps } from 'views/ChannelsNav/ChannelsDropDownNav/ChannelItem';
-import { ChannelsListProps } from 'views/ChannelsNav/ChannelsDropDownNav/ChannelsList';
+import { ChannelItemProps } from 'views/Mosaic/ChannelsNav/ChannelsDropDownNav/ChannelItem';
+import { ChannelsListProps } from 'views/Mosaic/ChannelsNav/ChannelsDropDownNav/ChannelsList';
 // libraries
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 // components
-import ChannelItem from 'views/ChannelsNav/ChannelsDropDownNav/ChannelItem';
-import ChannelsList from 'views/ChannelsNav/ChannelsDropDownNav/ChannelsList';
-import ChannelsDropDownNav from 'views/ChannelsNav/ChannelsDropDownNav/ChannelsDropDownContainer';
+import ChannelItem from 'views/Mosaic/ChannelsNav/ChannelsDropDownNav/ChannelItem';
+import ChannelsList from 'views/Mosaic/ChannelsNav/ChannelsDropDownNav/ChannelsList';
+import ChannelsDropDownNav from 'views/Mosaic/ChannelsNav/ChannelsDropDownNav/ChannelsDropDownContainer';
 
 const renderWithRouter = (children: ReactElement) =>
   render(<MemoryRouter>{children}</MemoryRouter>);

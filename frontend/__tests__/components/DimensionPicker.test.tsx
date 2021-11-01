@@ -2,8 +2,8 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 // components
-import Dimension from 'views/MosaicFiltersBar/DimensionPicker/Dimension';
-import Dimensions from 'views/MosaicFiltersBar/DimensionPicker/Dimensions';
+import Dimension from 'views/Mosaic/MosaicFiltersBar/DimensionPicker/Dimension';
+import Dimensions from 'views/Mosaic/MosaicFiltersBar/DimensionPicker/Dimensions';
 describe('Dimension', () => {
   for (const [dimension, expected] of [
     ['all', /all/i],

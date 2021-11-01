@@ -5,21 +5,12 @@ import store from 'application/store';
 // style
 import './App.css';
 // test!!!
-import ChannelsDropDownNav from 'views/ChannelsNav/ChannelsDropDownNav';
-import DimensionPicker from 'views/MosaicFiltersBar/DimensionPicker';
-import ExplorePicker from 'views/MosaicFiltersBar/ExplorePicker';
-import GridAdjustment from 'views/MosaicFiltersBar/GridAdjustment';
-import DropDownMediasMediumsPicker from 'views/MosaicFiltersBar/MediasMediumsDropDownPicker';
+import Mosaic from 'views/Mosaic';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div>App</div>
-      <ChannelsDropDownNav />
-      <DimensionPicker btnLocation="outside" />
-      <ExplorePicker />
-      <GridAdjustment />
-      <DropDownMediasMediumsPicker />
+      <Mosaic />
     </Provider>
   );
 };

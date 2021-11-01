@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 // components
-import Media from 'views/MosaicFiltersBar/MediasMediumsDropDownPicker/Media';
-import Medium from 'views/MosaicFiltersBar/MediasMediumsDropDownPicker/Medium';
+import Media from 'views/Mosaic/MosaicFiltersBar/MediasMediumsDropDownPicker/Media';
+import Medium from 'views/Mosaic/MosaicFiltersBar/MediasMediumsDropDownPicker/Medium';
 
 describe('MediaMedium', () => {
   const stubBaseProps = { pick: jest.fn(), picked: true };
