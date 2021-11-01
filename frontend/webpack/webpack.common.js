@@ -42,4 +42,10 @@ module.exports = {
       template: path.resolve(__dirname, '..', 'public/index.html'),
     }),
   ],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'build'),
+    clean: true,
+    publicPath: '/',
+  },
 };

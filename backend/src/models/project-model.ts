@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose';
+import { nanoid } from 'nanoid';
 
 const projectSchema = new Schema({
+  _id: {
+    type: String,
+    default: () => nanoid(),
+  },
   adult_content: Boolean,
   comments_count: { type: Number, default: 0 },
   likes_count: { type: Number, default: 0 },
@@ -22,18 +27,20 @@ const projectSchema = new Schema({
   tags: [String],
   permalink: String,
   /* NECESSAIRE POUR SHOWCASE MOSAIC */
+  smaller_square_cover_url: String,
   cover_asset_id: String, // transformé en => smaller_square_cover_url: String <= avec CDN transformation
   title: String,
   url: String,
   hide_as_adult: { type: Boolean, default: false },
-  icons: {
-    image: { type: Boolean, default: false },
-    video: { type: Boolean, default: false },
-    video_clip: { type: Boolean, default: false },
-    model3d: { type: Boolean, default: false },
-    marmoset: { type: Boolean, default: false },
-    pano: { type: Boolean, default: false },
-  },
+  // icons: { // créé  au transit
+  image: { type: Boolean, default: false },
+  video: { type: Boolean, default: false },
+  video_clip: { type: Boolean, default: false },
+  model3d: { type: Boolean, default: false },
+  marmoset: { type: Boolean, default: false },
+  pano: { type: Boolean, default: false },
+
+  // },
 });
 
 export default model('project', projectSchema);

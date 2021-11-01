@@ -107,7 +107,7 @@ const withState = (Component: ComponentType<WrappedComponentProps>) => {
 
     useEffect(() => {
       if (!/artwork/.test(location.pathname)) {
-        console.log('FIRE FETCH WITH NEW URL!!!');
+        console.log('FIRE FETCH WITH NEW URL!!!: ', url);
         dispatch(getProjectsAC(url));
       }
     }, [url, location.pathname, dispatch]);

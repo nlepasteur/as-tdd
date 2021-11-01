@@ -13,7 +13,7 @@ const getSoftwareByRegExp =
     return softwares;
   };
 
-module.exports = (model: typeof softwareModel) => ({
+export default (model: typeof softwareModel) => ({
   createSoftware: createSoftware(model),
   getSoftwareByRegExp: getSoftwareByRegExp(model),
 });

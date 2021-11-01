@@ -5,13 +5,15 @@ import cors from 'cors';
 import morgan from 'morgan';
 // modules
 import server from '../server';
+// models
+import mediumModel from './models/medium-model';
 // routes
-// import channelsRoute from '@routes/channels';
 import channelsRoutes from './api/routes/channels-routes';
 import preferedChannelsRoutes from './api/routes/prefered-channels-routes';
 import registrationRoutes from './api/routes/registration-routes';
 import preferedGridSizeRoutes from './api/routes/prefered-grid-size-routes';
 import projectsRoutes from './api/routes/projects-routes';
+import mediumsRoutes from './api/routes/mediums-routes';
 
 const app = express();
 
@@ -62,6 +64,7 @@ app.use('/projects', projectsRoutes);
 app.use('/channels', channelsRoutes);
 app.use('/prefered/grid-size', preferedGridSizeRoutes);
 app.use('/prefered/channels', preferedChannelsRoutes);
+app.use('/mediums', mediumsRoutes);
 
 app.get('/', (req, res, next) => {
   res.json({ message: 'welcome' });

@@ -17,7 +17,7 @@ const getCategories = (model: typeof categoryModel) => () => {
   return model.find();
 };
 
-module.exports = (model: typeof categoryModel) => ({
+export default (model: typeof categoryModel) => ({
   createCategory: createCategory(model),
   getCategories: getCategories(model),
 });

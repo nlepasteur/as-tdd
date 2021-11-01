@@ -35,6 +35,7 @@ const Mosaic = () => {
         : dimension && dispatch(setDimension(dimension));
     }
   }, [location, dispatch]);
+  // const position = /artwork/.test(location.pathname) ? 'fixed' : 'relative';
   return (
     <div>
       <MosaicFiltersBar />

@@ -28,7 +28,7 @@ const updateOneAsset =
     return model.updateOne({ _id: query.id }, update);
   };
 
-module.exports = (model: typeof assetModel) => ({
+export default (model: typeof assetModel) => ({
   createAsset: createAsset(model),
   findOneAsset: findOneAsset(model),
   deleteOneAsset: deleteOneAsset(model),

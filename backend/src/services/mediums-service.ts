@@ -10,7 +10,7 @@ const getMediums = (model: typeof mediumModel) => () => {
   return model.find();
 };
 
-module.exports = (model: typeof mediumModel) => ({
+export default (model: typeof mediumModel) => ({
   createMedium: createMedium(model),
   getMediums: getMediums(model),
 });

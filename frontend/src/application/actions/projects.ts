@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const stubProject = {
   icons: {
     image: true,
@@ -63,9 +65,9 @@ export const getProjects =
       (async function () {
         // const response = await fetch(`http://localhost:8080${url}`);
         // const data = await response?.json();
-        const data = [...Array(100)].map((_, i) => ({
+        const data = [...Array(100)].map(() => ({
           ...stubProject,
-          id: `${i}`,
+          id: nanoid(),
         }));
         dispatch(getProjectsSuccess(data));
         getState().explore === 'community' &&
