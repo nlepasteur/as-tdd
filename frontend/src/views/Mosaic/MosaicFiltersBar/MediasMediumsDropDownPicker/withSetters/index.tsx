@@ -5,6 +5,7 @@ import type { ThunkAction } from 'redux-thunk';
 import type { RootState } from 'application/store';
 // store utils
 import { useAppDispatch } from 'application/hooks';
+import { clearProjects } from 'application/actions/projects';
 // utils
 import { stringIntoArray } from 'utils/stringUtils';
 import updateLocalStorage from 'utils/updateLocalStorage';
@@ -35,6 +36,7 @@ function withSetters<T, S extends string>(di: DI<T, S>) {
       const dispatch = useAppDispatch();
 
       const pick = (pickable: string) => {
+        dispatch(clearProjects());
         const picked = localStorage.getItem(di.target);
         if (picked) {
           const parsedPickable = JSON.parse(picked);

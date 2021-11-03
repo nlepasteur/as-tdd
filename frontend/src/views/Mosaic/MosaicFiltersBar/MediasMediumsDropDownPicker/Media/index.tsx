@@ -1,5 +1,5 @@
 type MediaProps = {
-  pickable: { name: string };
+  pickable: { name: string; as_query: string };
   pick: (media: string) => void;
   picked: boolean;
 };
@@ -9,7 +9,7 @@ const Media = (props: MediaProps) => (
     <input
       type="checkbox"
       checked={props.picked}
-      onChange={() => props.pick(props.pickable.name)}
+      onChange={() => props.pick(props.pickable.as_query)}
     />
     {props.pickable.name}
     <span className="custom" />

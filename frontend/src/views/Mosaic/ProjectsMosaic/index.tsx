@@ -3,6 +3,6 @@ import withInfiniteScroll from './withInfiniteScroll';
 import MosaicListContainer from './MosaicListContainer';
 
 export default {
-  infiniteScrollProjectsMosaic: withState(MosaicListContainer),
-  shuffledProjectsMosaic: withState(withInfiniteScroll),
+  shuffledProjectsMosaic: withState(MosaicListContainer),
+  infiniteScrollProjectsMosaic: withState(withInfiniteScroll),
 };

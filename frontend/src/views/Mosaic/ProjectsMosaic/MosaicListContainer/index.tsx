@@ -18,18 +18,20 @@ type PropsFromWithStateOrSetter = {
   latest?: boolean;
   following?: boolean;
   grid?: Grid;
+  shuffledProjects?: Project[];
 };
 
 const MosaicListContainer = ({
   status,
   error,
+  shuffledProjects = [],
   ...props
 }: PropsFromWithStateOrSetter) => (
   <div>
     {status === 'init' || status === 'fetching' ? (
-      <div>loadin...</div>
+      <div>loading...</div>
     ) : (
-      <MosaicList {...props} />
+      <MosaicList shuffledProjects={shuffledProjects} {...props} />
     )}
   </div>
 );

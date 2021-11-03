@@ -6,7 +6,6 @@
 
 .mm-dd__menu {
   background-color: rgb(var(--grey-bg-34));
-
   color: rgb(var(--grey-bg-187));
   position: absolute;
   top: calc(100% + 0.2em);

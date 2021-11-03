@@ -48,8 +48,6 @@ type Explore = Community | Trending | Latest | Following;
 
 type IsChannel = { isChannel: true };
 
-type ProjectsFetchState = FetchState<Project>;
-
 export type LocationWithState = ReturnType<typeof useLocation>;
 
 type WrappedComponentProps = {
@@ -57,6 +55,7 @@ type WrappedComponentProps = {
   status: FetchStatus;
   error: null | string;
   data: Project[];
+  shuffledProjects?: Project[];
   community?: boolean;
   trending?: boolean;
   latest?: boolean;
@@ -89,36 +88,64 @@ const withState = (Component: ComponentType<WrappedComponentProps>) => {
     const asset_types = useAppSelector(getPickedMedias);
     const per_page = 100;
     const grid = useAppSelector(getPreferedGrid);
-    const projects = props.community ? shuffledProjects : projectsState.data;
+
+    const formatDataIntoQs = (mediums: string, text: string) =>
+      mediums
+        .split(',')
+        .map((medium) => medium.trim())
+        .reduce((acc, cur) => {
+          return `${acc}&${text}=${cur}`;
+        }, '');
 
     const url = isExplore
       ? props.community
         ? `/community/explore/projects/community?page=${pagination}&dimension=${dimension}&per_page=${per_page}${
-            medium_ids.length ? `&medium_ids=${medium_ids}` : ''
-          }${asset_types.length ? `asset_types=${asset_types}` : ''}`
+            medium_ids.length ? formatDataIntoQs(medium_ids, 'medium_ids') : ''
+          }${
+            asset_types.length
+              ? formatDataIntoQs(asset_types, 'asset_types')
+              : ''
+          }`
         : `/community/explore/projects/${
             props.trending ? 'trending' : props.latest ? 'latest' : 'following'
           }?page=${pagination}&dimension=${dimension}&per_page=${per_page}${
-            medium_ids.length ? `&medium_ids=${medium_ids}` : ''
-          }${asset_types.length ? `asset_types=${asset_types}` : ''}`
+            medium_ids.length ? formatDataIntoQs(medium_ids, 'medium_ids') : ''
+          }${
+            asset_types.length
+              ? formatDataIntoQs(asset_types, 'asset_types')
+              : ''
+          }`
       : `/channels?page=${pagination}&dimension=${dimension}&per_page=${per_page}${
-          medium_ids.length ? `&medium_ids=${medium_ids}` : ''
-        }${asset_types.length ? `asset_types=${asset_types}` : ''}`;
+          medium_ids.length ? formatDataIntoQs(medium_ids, 'medium_ids') : ''
+        }${
+          asset_types.length ? formatDataIntoQs(asset_types, 'asset_types') : ''
+        }`;
 
+    // projectsState.data.length = per_page * pagination
     useEffect(() => {
-      if (!/artwork/.test(location.pathname)) {
-        console.log('FIRE FETCH WITH NEW URL!!!: ', url);
+      console.log('ENTERS USEEFFECT, new url is: ', url);
+      if (
+        (!/artwork/.test(location.pathname) && !projectsState.data.length) ||
+        (!/artwork/.test(location.pathname) &&
+          projectsState.data.length !== per_page * pagination)
+      ) {
         dispatch(getProjectsAC(url));
       }
-    }, [url, location.pathname, dispatch]);
+    }, [url, location.pathname, dispatch, projectsState.data.length]);
 
-    return (
+    return props.community ? (
+      <Component
+        location={location}
+        {...props}
+        {...projectsState}
+        shuffledProjects={shuffledProjects}
+      />
+    ) : (
       <Component
         location={location}
         grid={grid}
         {...props}
         {...projectsState}
-        data={projects}
       />
     );
   }

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { useAppDispatch } from 'application/hooks';
 import { clearPickedMedias } from 'application/actions/medias';
 import { clearPickedMediums } from 'application/actions/mediums';
+import { clearProjects } from 'application/actions/projects';
 // utils
 import updateLocalStorage from 'utils/updateLocalStorage';
 // style
@@ -16,6 +17,7 @@ const MediasMediumsDropDownClearButton = ({
 }) => {
   const dispatch = useAppDispatch();
   const clear = () => {
+    dispatch(clearProjects());
     dispatch(clearPickedMedias());
     dispatch(clearPickedMediums());
     updateLocalStorage('medias', '');

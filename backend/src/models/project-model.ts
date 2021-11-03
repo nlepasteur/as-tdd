@@ -17,8 +17,8 @@ const projectSchema = new Schema({
   suppressed: { type: Boolean, default: false },
   visible: { type: Boolean, default: true },
 
-  description: String,
-  user_id: String,
+  description: { type: String, default: '' },
+  user_id: { type: String, default: '' },
   asset_ids: [String],
   album_ids: [String],
   category_ids: [String],

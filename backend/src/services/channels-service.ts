@@ -3,10 +3,11 @@ import Channel from '../models/channel-model';
 const getChannels =
   (model: typeof Channel) =>
   async ({ user_id = '' }) => {
+    console.log('user user_id for pipeline: ', user_id);
     const channels = await model.aggregate([
       {
         $lookup: {
-          from: 'favorites',
+          from: 'prefered-channels',
           as: 'res',
           let: {
             channel_id: '$_id',
@@ -46,11 +47,13 @@ const getChannels =
         $unset: ['_id', 'res', '__v'],
       },
     ]);
-    return channels.map((channel) => ({
+    console.log('channels before change! ', channels);
+    const after = channels.map((channel) => ({
       ...channel,
       favorite_position:
         'favorite_position' in channel ? channel.favorite_position : null,
     }));
+    return after;
   };
 
 const createChannel =

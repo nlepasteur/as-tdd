@@ -1,0 +1,50 @@
+.mosaic-list {
+  display: grid;
+}
+
+.mosaic-list a,
+.mosaic-list img {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.mosaic-list--community {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-auto-flow: dense;
+}
+
+.mosaic-list--community .mosaic-list__item--0 {
+  grid-area: auto / auto / span 3 / span 3;
+}
+
+.mosaic-list--community .mosaic-list__item--1,
+.mosaic-list--community .mosaic-list__item--2 {
+  grid-area: auto / auto / span 2 / span 2;
+}
+
+/* modifier selon viewport */
+.mosaic-list--small {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.mosaic-list--default {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.mosaic-list--large {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.mosaic-list__item {
+  display: grid;
+  border: 1px solid #171717;
+}
+
+.mosaic-list__item img {
+  width: 100%;
+  object-fit: cover;
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.mosaic-list__item a {
+  grid-area: 1 / 1 / 2 / 2;
+}

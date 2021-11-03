@@ -23,15 +23,42 @@ const getProjectsForMosaic =
     const skip = per_page * page - 1;
     // const assetTypesConstraint = asset_types ? à voir selon comment sont reçus
     // créer stages selon comment sont envoyé query string
+
+    const firstStage = Object.assign(
+      {},
+      (medium_ids || asset_types) && {
+        $match: Object.assign(
+          {},
+          medium_ids.length && !asset_types.length
+            ? { mediums: { $all: ['1', '2', '3'] } }
+            : !medium_ids.length && asset_types.length
+            ? {
+                ...['asset_type1', 'asset_type2'].reduce(
+                  (acc, cur) => Object.assign(acc, { [cur]: true }),
+                  {}
+                ),
+              }
+            : {
+                mediums: { $all: ['1', '2', '3'] },
+                ...['asset_type1', 'asset_type2'].reduce(
+                  (acc, cur) => Object.assign(acc, { [cur]: true }),
+                  {}
+                ),
+              }
+        ),
+      }
+    );
+
     const projects = model.aggregate([
-      {
-        $match: {
-          mediums: {
-            $all: ['1', '2'],
-          },
-          marmoset: true,
-        },
-      },
+      firstStage,
+      // {
+      //   $match: {
+      //     mediums: {
+      //       $all: ['1', '2'],
+      //     },
+      //     marmoset: true,
+      //   },
+      // },
       {
         $skip: 2,
       },

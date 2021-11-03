@@ -4,7 +4,7 @@ declare module 'express-session' {
   interface SessionData {
     user: {
       _id: string;
-      name: string;
+      username: string;
       email: string;
       followed_channels: string[];
     };

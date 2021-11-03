@@ -17,7 +17,7 @@ export const createProject: RequestHandlerMiddleware = async (
 ) => {
   const body = req.body;
   try {
-    const response = await projectsService.create(body);
+    const response = await projectsService.createProject(body);
     console.log('newly created project: ', response);
     res.json(response);
   } catch (e) {

@@ -15,11 +15,10 @@ export const createPreferedChannel: RequestHandlerMiddleware = async (
   res,
   next
 ) => {
-  const user_id = req.session.user && req.session.user._id;
-  const query = { ...req.body, user_id };
+  const follower_id = req.session.user && req.session.user._id;
+  const query = { ...req.body, follower_id };
   try {
     const channel = await preferedChannelsService.createPreferedChannel(query);
-    console.log('newly stored prefered channel: ', channel);
     res.status(201).end();
   } catch (e) {
     next(e);
@@ -35,7 +34,6 @@ export const deletePreferedChannel: RequestHandlerMiddleware = async (
     const response = await preferedChannelsService.deletePreferedChannel(
       req.body
     );
-    console.log('removed prefered channel: ', response);
     res.status(200).end();
   } catch (e) {
     next(e);

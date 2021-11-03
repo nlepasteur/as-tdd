@@ -19,6 +19,7 @@
   box-shadow: 8px 0 34px 0 rgba(0, 0, 0, 0.87);
   border-radius: 6px;
   color: rgb(var(--white-text));
+  z-index: 1000;
 }
 
 .channelsdd__menu {

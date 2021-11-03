@@ -44,7 +44,7 @@ function mediasMediumsList<T>(
               <li key={i}>
                 <Media
                   pickable={mediaMedium}
-                  picked={props.picked.includes(mediaMedium.name)}
+                  picked={props.picked.includes(mediaMedium.as_query)}
                   pick={props.pick}
                 />
               </li>

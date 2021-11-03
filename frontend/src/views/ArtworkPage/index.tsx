@@ -1,9 +1,10 @@
+// types
+import type { ReactElement } from 'react';
 // components
-import ArtworkPageGlobalStyle from './ArtworkPageGlobalStyle';
 import ArtistInfos from './ArtistInfos';
 
 const ArtworkPage = () => (
-  <ArtworkPageGlobalStyle>
+  <PreventStopScrollOnArtworkPageOverlay>
     <ArtistInfos username="nicoco" />
     <div>
       <p>
@@ -120,7 +121,28 @@ const ArtworkPage = () => (
         reiciendis ullam, neque maiores!
       </p>
     </div>
-  </ArtworkPageGlobalStyle>
+  </PreventStopScrollOnArtworkPageOverlay>
 );
 
+function PreventStopScrollOnArtworkPageOverlay({
+  children,
+}: {
+  children: ReactElement[];
+}) {
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'auto',
+        backgroundColor: 'rgba(23, 23, 23, 0.5)',
+        color: '#fff',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 export default ArtworkPage;

@@ -80,7 +80,30 @@ const MediasMediumsDropDownPicker = () => {
           <MediumsList />
           <div className="mm-dd__separation " />
           <span className="mm-dd__list-title">ONLY SHOW PROJECTS WITH:</span>
-          <MediasList data={[{ name: 'media 1' }, { name: 'media 2' }]} />
+          <MediasList
+            data={[
+              {
+                name: 'marmoset viewer',
+                as_query: 'marmoset',
+              },
+              {
+                name: 'sketchfab',
+                as_query: 'sketchfab',
+              },
+              {
+                name: 'video clip',
+                as_query: 'video_clip',
+              },
+              {
+                name: 'video',
+                as_query: 'video',
+              },
+              {
+                name: '360 panos',
+                as_query: 'pano',
+              },
+            ]}
+          />
         </div>
       )}
     </div>

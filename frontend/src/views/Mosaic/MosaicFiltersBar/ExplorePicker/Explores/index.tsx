@@ -1,18 +1,22 @@
 // types
 import type { ComponentType, ReactElement } from 'react';
 import type { Dimension } from 'application/reducers/dimension';
+import type { Explore as ExploreType } from 'application/reducers/explore';
 // components
 import Explore from '../Explore';
 // style
 import './Explores.css';
 
-type ExploresProps = {
+type PropsFromWithState = {
   isLogged: boolean;
   dimension: Dimension;
+  setExplore: (explore: ExploreType) => void;
+  resetPagination: () => void;
+  clearProjects: () => void;
 };
 
 export const explores = (Component: ComponentType) => {
-  function Explores(props: ExploresProps) {
+  function Explores({ isLogged, ...props }: PropsFromWithState) {
     return (
       <ul className="explore-list">
         {!/channels/.test(location.pathname) && (
@@ -22,7 +26,7 @@ export const explores = (Component: ComponentType) => {
         )}
         <Explore {...props} explore="trending" />
         <Explore {...props} explore="latest" />
-        {props.isLogged && <Explore {...props} explore="following" />}
+        {isLogged && <Explore {...props} explore="following" />}
       </ul>
     );
   }

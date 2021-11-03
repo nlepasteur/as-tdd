@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 const mediumSchema = new Schema({
   _id: {
     type: String,
-    default: nanoid(),
+    default: () => nanoid(),
   },
   name: String,
   uri: String,

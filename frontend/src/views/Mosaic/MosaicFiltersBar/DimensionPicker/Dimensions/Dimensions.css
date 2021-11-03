@@ -6,24 +6,25 @@
   grid-area: dimensionpicker;
 }
 
-.dimension-list__item a {
+.dimension-list__item button {
   border-radius: 2px;
   padding: 2px 12px 3px;
-}
-
-.dimension-list__item a:visited {
   color: #bbb;
 }
 
-.dimension-list__item a:hover {
+/* .dimension-list__item a:visited {
+  color: #bbb;
+} */
+
+.dimension-list__item button:hover {
   color: #fff;
 }
 
-.dimension-list .active a {
+.dimension-list .active button {
   background: rgba(19, 175, 240, 0.3);
 }
 
-.dimension-list .dimension-list__item a {
+.dimension-list .dimension-list__item button {
   transition: color 0.2s linear;
 }
 
@@ -31,7 +32,7 @@
   display: none;
 }
 
-.dimension-list .active span {
+.dimension-list .active button {
   text-shadow: rgba(0, 0, 0, 0.35) 0px 1px 1px;
   color: #fff;
 }

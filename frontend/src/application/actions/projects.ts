@@ -60,18 +60,21 @@ export const getProjectsSuccess: GetSuccess<Project, 'projects'> = (
 export const getProjects =
   (url: string): ThunkAction<void, RootState, null, AnyAction> =>
   (dispatch, getState) => {
+    const explore = getState().explore;
     dispatch(getProjectsFetching());
+    // ci-dessous doit prendre effet au changement de page et au refresh de la mosaïque
+    explore === 'community' && dispatch(clearProjects());
     try {
       (async function () {
         // const response = await fetch(`http://localhost:8080${url}`);
         // const data = await response?.json();
-        const data = [...Array(100)].map(() => ({
+        const data = [...Array(100)].map((_, i) => ({
           ...stubProject,
-          id: nanoid(),
+          // id: nanoid(),
+          id: String(i),
         }));
+        explore === 'community' && dispatch(setShuffledProjects(shuffle(data)));
         dispatch(getProjectsSuccess(data));
-        getState().explore === 'community' &&
-          dispatch(setShuffledProjects(shuffle(data)));
       })();
     } catch (error) {
       dispatch(getProjectsFailure(error.message));

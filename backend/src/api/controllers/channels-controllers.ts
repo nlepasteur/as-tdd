@@ -19,3 +19,16 @@ export const getChannels: RequestHandlerMiddleware = async (req, res, next) => {
     next(e);
   }
 };
+
+export const createChannel: RequestHandlerMiddleware = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const channel = await channelsService.createChannel(req.body);
+    res.status(201).json(channel);
+  } catch (e) {
+    next(e);
+  }
+};

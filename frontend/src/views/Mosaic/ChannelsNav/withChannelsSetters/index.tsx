@@ -29,7 +29,7 @@ const withChannelsSetters = (
           try {
             dispatch({ type: 'FETCHING' });
             const response = await fetch(
-              'http://localhost:8080/channels/favorites/add',
+              'http://localhost:8080/prefered/channels/add',
               {
                 method: 'POST',
                 headers: {
@@ -40,6 +40,7 @@ const withChannelsSetters = (
               }
             );
             response.ok && dispatch({ type: 'SUCCESS' });
+            console.log('response: ', response);
             setFollowedLength(WithChannelsStateProps.followedLength + 1);
           } catch (e) {
             dispatch({ type: 'FAILURE', payload: e.message });
@@ -51,7 +52,7 @@ const withChannelsSetters = (
           try {
             dispatch({ type: 'FETCHING' });
             const response = await fetch(
-              'http://localhost:8080/channels/favorites/remove',
+              'http://localhost:8080/prefered/channels/remove',
               {
                 method: 'POST',
                 headers: {

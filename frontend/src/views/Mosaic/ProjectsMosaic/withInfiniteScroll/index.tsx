@@ -1,7 +1,6 @@
 // types
 import type { Project } from '@api';
 import type { LocationWithState } from '../withState';
-import type { Grid } from 'application/reducers/grid';
 // libs
 import { useState, useEffect } from 'react';
 // store utils
@@ -18,7 +17,6 @@ type PropsFromWithState = {
   error: null | string;
   data: Project[];
   community?: boolean;
-  cb?: (ref: HTMLElement) => void;
 };
 
 const WithInfiniteScroll = (props: PropsFromWithState) => {

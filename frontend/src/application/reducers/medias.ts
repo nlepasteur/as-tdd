@@ -3,7 +3,7 @@ import type { MediasActions } from '../actions/medias';
 // utils
 import { stringIntoArray } from 'utils/stringUtils';
 
-export type Media = { name: string };
+export type Media = { name: string; as_query: string };
 
 const pickedMediasReducer = (state = '', action: MediasActions) => {
   switch (action.type) {

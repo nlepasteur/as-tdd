@@ -27,34 +27,34 @@ export const getMediumsSuccess: GetSuccess<Medium, 'mediums'> = (
 
 export const getMediums =
   (): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
-    // dispatch(getMediumsFetching());
+    dispatch(getMediumsFetching());
     try {
       (async function () {
-        // const response = await fetch("");
-        // dispatch(getMediumsSuccess(await response?.json()));
-        dispatch(
-          getMediumsSuccess([
-            {
-              id: '0',
-              name: 'medium1',
-              uri: '',
-            },
-            {
-              id: '1',
-              name: 'medium2',
-              uri: '',
-            },
-            {
-              id: '2',
-              name: 'medium3',
-              uri: '',
-            },
-          ])
-        );
+        const response = await fetch('http://localhost:8080/mediums');
+        dispatch(getMediumsSuccess(await response?.json()));
+        // dispatch(
+        //   getMediumsSuccess([
+        //     {
+        //       id: '0',
+        //       name: 'medium1',
+        //       uri: '',
+        //     },
+        //     {
+        //       id: '1',
+        //       name: 'medium2',
+        //       uri: '',
+        //     },
+        //     {
+        //       id: '2',
+        //       name: 'medium3',
+        //       uri: '',
+        //     },
+        //   ])
+        // );
       })();
     } catch (error) {
       console.log('error: ', error);
-      // dispatch(getMediumsFailure(error.message));
+      dispatch(getMediumsFailure(error.message));
     }
   };
 

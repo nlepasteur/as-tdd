@@ -1,31 +1,43 @@
 // types
 import type { ReactElement } from 'react';
+import type { Explore as ExploreType } from 'application/reducers/explore';
 import type { Dimension } from 'application/reducers/dimension';
 // libs
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import classnames from 'classnames';
+// utils
+import updateLocalStorage from 'utils/updateLocalStorage';
 // style
 import './Explore.css';
 
-type Explore = 'community' | 'trending' | 'latest' | 'following';
-
-type ExploreProps = {
-  explore: Explore;
+type PropsFromExplores = {
+  explore: ExploreType;
   dimension: Dimension;
   children?: ReactElement;
+  setExplore: (explore: ExploreType) => void;
+  resetPagination: () => void;
+  clearProjects: () => void;
 };
 
-const Explore = (props: ExploreProps) => {
+const Explore = (props: PropsFromExplores) => {
+  const history = useHistory();
   const location = useLocation();
   const currentExplore = /sort_by=([^&]+)/.exec(location.search);
 
   const generatePathname = (explore: string) => {
-    // aurait pu tout aussi bien se faire en utilisant location
     return props.dimension !== 'all'
       ? `/?sort_by=${explore}&dimension=${props.dimension}`
       : `/?sort_by=${explore}`;
   };
-  // si navling ne fait pas l'affaire utiliser location et comparer search à props.explore
+
+  const handleExploreClick = (explore: ExploreType) => {
+    props.clearProjects();
+    props.resetPagination();
+    props.setExplore(explore);
+    updateLocalStorage('explore', explore);
+    history.push(generatePathname(explore));
+  };
+
   return (
     <li
       className={classnames(
@@ -35,9 +47,12 @@ const Explore = (props: ExploreProps) => {
           'explore-list__item--active'
       )}
     >
-      <Link to={generatePathname(props.explore)}>
+      <button
+        className="explore-btn"
+        onClick={() => handleExploreClick(props.explore)}
+      >
         <span>{props.explore}</span>
-      </Link>
+      </button>
       {props.children && props.children}
     </li>
   );

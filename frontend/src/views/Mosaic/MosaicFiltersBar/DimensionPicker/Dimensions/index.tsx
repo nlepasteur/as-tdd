@@ -1,5 +1,6 @@
 // types
-import { Explore } from 'application/reducers/explore';
+import type { Dimension as DimensionType } from 'application/reducers/dimension';
+import type { Explore as ExploreType } from 'application/reducers/explore';
 // libs
 import { useLocation } from 'react-router-dom';
 import classnames from 'classnames';
@@ -8,12 +9,15 @@ import Dimension from '../Dimension';
 // style
 import './Dimensions.css';
 
-type DimensionsProps = {
-  explore: Explore;
+type PropsFromWithState = {
+  explore: ExploreType;
   btnLocation: 'inside' | 'outside';
+  setDimension: (explore: DimensionType) => void;
+  resetPagination: () => void;
+  clearProjects: () => void;
 };
 
-const Dimensions = ({ btnLocation, ...props }: DimensionsProps) => {
+const Dimensions = ({ btnLocation, ...props }: PropsFromWithState) => {
   const location = useLocation();
   const currentExplore = /dimension=(.+)$/.exec(location.search);
   return (

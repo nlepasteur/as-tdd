@@ -7,7 +7,20 @@ const createMedium =
   };
 
 const getMediums = (model: typeof mediumModel) => () => {
-  return model.find();
+  // return model.find();
+  return model.aggregate([
+    {
+      $set: {
+        id: '$_id',
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        __v: 0,
+      },
+    },
+  ]);
 };
 
 export default (model: typeof mediumModel) => ({
