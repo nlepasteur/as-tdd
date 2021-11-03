@@ -14,56 +14,65 @@ const getProjectsForMosaic =
     page,
     asset_types,
   }: {
-    per_page: number;
-    medium_ids: string;
-    dimension: string;
-    page: number;
-    asset_types: string;
+    per_page: string;
+    medium_ids?: string[];
+    dimension?: string;
+    page: string;
+    asset_types?: string[];
   }) => {
-    const skip = per_page * page - 1;
-    // const assetTypesConstraint = asset_types ? à voir selon comment sont reçus
-    // créer stages selon comment sont envoyé query string
+    const skip = Number(per_page) * (Number(page) - 1);
 
-    const firstStage = Object.assign(
-      {},
-      (medium_ids || asset_types) && {
-        $match: Object.assign(
-          {},
-          medium_ids.length && !asset_types.length
-            ? { mediums: { $all: ['1', '2', '3'] } }
-            : !medium_ids.length && asset_types.length
-            ? {
-                ...['asset_type1', 'asset_type2'].reduce(
-                  (acc, cur) => Object.assign(acc, { [cur]: true }),
-                  {}
-                ),
-              }
-            : {
-                mediums: { $all: ['1', '2', '3'] },
-                ...['asset_type1', 'asset_type2'].reduce(
-                  (acc, cur) => Object.assign(acc, { [cur]: true }),
-                  {}
-                ),
-              }
-        ),
-      }
-    );
+    function createMatchStage(
+      medium_ids: string | string[] | undefined,
+      asset_types: string | string[] | undefined
+    ) {
+      const firstStage = Object.assign(
+        { $match: {} },
+        (medium_ids || asset_types) && {
+          $match: Object.assign(
+            {},
+            medium_ids && !asset_types
+              ? { mediums: { $all: [medium_ids].flat(2) } }
+              : !medium_ids && asset_types
+              ? {
+                  ...[asset_types]
+                    .flat(2)
+                    .reduce(
+                      (acc, cur) => Object.assign(acc, { [cur]: true }),
+                      {}
+                    ),
+                }
+              : asset_types && {
+                  mediums: { $all: [medium_ids].flat(2) },
+                  ...[asset_types]
+                    .flat(2)
+                    .reduce(
+                      (acc, cur) => Object.assign(acc, { [cur]: true }),
+                      {}
+                    ),
+                }
+          ),
+        }
+      );
+      return firstStage;
+    }
+
+    const mediums =
+      dimension && medium_ids
+        ? medium_ids.concat(dimension)
+        : dimension
+        ? [dimension]
+        : medium_ids && medium_ids;
+
+    console.log('match stage:', createMatchStage(mediums, asset_types));
 
     const projects = model.aggregate([
-      firstStage,
-      // {
-      //   $match: {
-      //     mediums: {
-      //       $all: ['1', '2'],
-      //     },
-      //     marmoset: true,
-      //   },
-      // },
+      createMatchStage(mediums, asset_types),
       {
-        $skip: 2,
+        $skip: skip,
       },
       {
-        $limit: 100,
+        $limit: Number(per_page),
       },
       {
         $lookup: {
@@ -136,8 +145,11 @@ const getProjectsForMosaic =
         },
       },
     ]);
+
+    return projects;
   };
 
 export default (model: typeof Project) => ({
   createProject: createProject(model),
+  getProjectsForMosaic: getProjectsForMosaic(model),
 });

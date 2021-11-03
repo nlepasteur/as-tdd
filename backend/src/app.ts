@@ -71,23 +71,24 @@ app.use(async function (req, res, next) {
 //     'nctXJxDwejdvPEI1xcih4',
 //     '_K4ChDnTTUUFuFuTP1CTg',
 //     'qXQr2F_V84ZBBQ-n8gajm',
+//     '2d',
+//     '3d',
 //   ];
 //   let pickedMediums = [];
 //   for (const medium_id of mediums) {
 //     Math.floor(Math.random() * 2) && pickedMediums.push(medium_id);
 //   }
+
 //   const fakeUsername = faker.name.firstName();
 //   const fakeFullName = `${fakeUsername} ${faker.name.lastName()}`;
 //   const fakeUrl = `https://via.placeholder.com/400?text=a+project+by+${fakeUsername}`;
 //   const fakeData = {
-//     icons: {
-//       image: faker.datatype.boolean(),
-//       video: faker.datatype.boolean(),
-//       video_clip: faker.datatype.boolean(),
-//       model_3d: faker.datatype.boolean(),
-//       marmoset: faker.datatype.boolean(),
-//       pano: faker.datatype.boolean(),
-//     },
+//     image: faker.datatype.boolean(),
+//     video: faker.datatype.boolean(),
+//     video_clip: faker.datatype.boolean(),
+//     model_3d: faker.datatype.boolean(),
+//     marmoset: faker.datatype.boolean(),
+//     pano: faker.datatype.boolean(),
 //     user: {
 //       medium_avatar_url: fakeUrl,
 //       is_organization_owner: faker.datatype.boolean(),
@@ -117,6 +118,7 @@ app.use('/prefered/channels', preferedChannelsRoutes);
 app.use('/mediums', mediumsRoutes);
 
 app.get('/', (req, res, next) => {
+  console.log(req.query);
   res.json({ message: 'welcome' });
 });
 

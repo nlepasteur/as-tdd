@@ -24,3 +24,25 @@ export const createProject: RequestHandlerMiddleware = async (
     next(e);
   }
 };
+
+export const getProjectsForMosaic: RequestHandlerMiddleware = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    console.log('req.query: ', req.query);
+    const projects = await projectsService.getProjectsForMosaic(
+      req.query as {
+        per_page: string;
+        medium_ids?: string[];
+        dimension?: string;
+        page: string;
+        asset_types?: string[];
+      }
+    );
+    res.status(200).json(projects);
+  } catch (e) {
+    next(e);
+  }
+};
